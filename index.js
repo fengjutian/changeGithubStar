@@ -3,12 +3,6 @@ const puppeteer = require('puppeteer');
 const readline = require('readline');
 const util = require('util');
 
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout
-// });
-// const rlQuestion = util.promisify(rl.question);
-
 // 配置参数
 const login_url = 'https://github.com/login';
 const user_home = 'https://github.com/fengjutian'
@@ -42,9 +36,8 @@ async function readTerminal() {
   await page.click('.session-authentication .auth-form .btn')
   // 跳转页面
   await page.waitForNavigation({
-      waitUntil: 'load'
+      waitUntil: 'networkidle2'
   })
-
 
 
   // 前往个人页面
@@ -59,13 +52,28 @@ async function readTerminal() {
     'var(--color-calendar-graph-day-L4-bg)'
   ]
 
-  await page.waitForSelector('rect').then(async () => {
-    const divsCounts = await page.$$eval('rect', e =>
-      {return e}
-    );
-    console.log('divsCounts', divsCounts[0])
+  // 截屏
+  await page.screenshot({
+    path: `./imgs/githun_${((new Date()).getTime())}.png`,
+    fullPage:true
+  });
 
+
+  // await page.waitForSelector('.graph-before-activity-overview').then(async () => {
+  //   const divsCounts = await page.$$eval('rect', e =>
+  //     {return e}
+  //   );
+  //   console.log('divsCounts', divsCounts)
+  // })
+
+  const selectEle = await page.evaluate(async () => {
+    const eleArr = document.querySelectorAll('rect')
+    return eleArr
   })
+
+  console.log('selectEle', selectEle)
+
+
 
 
 
@@ -78,10 +86,10 @@ async function readTerminal() {
 
 
   // 截屏
-  await page.screenshot({
-    path: `./imgs/githun_${((new Date()).getTime())}.png`,
-    fullPage:true
-  });
+  // await page.screenshot({
+  //   path: `./imgs/githun_${((new Date()).getTime())}.png`,
+  //   fullPage:true
+  // });
 
   await browser.close();
 
