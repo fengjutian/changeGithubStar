@@ -39,10 +39,8 @@ async function readTerminal() {
       waitUntil: 'networkidle2'
   })
 
-
   // 前往个人页面
   await page.goto(user_home);
-
 
   const colorStarArr = [
     'var(--color-calendar-graph-day-bg)',
@@ -52,6 +50,21 @@ async function readTerminal() {
     'var(--color-calendar-graph-day-L4-bg)'
   ]
 
+
+
+  let  divsCounts = [];
+  divsCounts = await page.waitForSelector('rect').then(async () => {
+    return await page.$$eval('rect', eles => { return eles });
+  })
+
+   console.log('divsCounts', divsCounts)
+
+  await page.evaluate(el => {
+    console.log('el', el)
+    return el.setAttribute('fill', 'var(--color-calendar-graph-day-L2-bg)')
+  },
+    divsCounts)
+
   // 截屏
   await page.screenshot({
     path: `./imgs/githun_${((new Date()).getTime())}.png`,
@@ -59,20 +72,15 @@ async function readTerminal() {
   });
 
 
-  // await page.waitForSelector('.graph-before-activity-overview').then(async () => {
-  //   const divsCounts = await page.$$eval('rect', e =>
-  //     {return e}
-  //   );
-  //   console.log('divsCounts', divsCounts)
+
+  // await page.waitForSelector('rect')
+
+  // const selectEle = await page.evaluate(async () => {
+  //   const eleArr = document.querySelectorAll('rect')
+  //   return eleArr
   // })
 
-  const selectEle = await page.evaluate(async () => {
-    const eleArr = document.querySelectorAll('rect')
-    return eleArr
-  })
-
-  console.log('selectEle', selectEle)
-
+  // console.log('selectEle', selectEle)
 
 
 
