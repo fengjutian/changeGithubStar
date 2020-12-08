@@ -1,7 +1,6 @@
 const Config = require('./file.js')
 const puppeteer = require('puppeteer');
 const readline = require('readline');
-const util = require('util');
 
 // 配置参数
 const login_url = 'https://github.com/login';
