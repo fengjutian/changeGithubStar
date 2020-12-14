@@ -49,37 +49,32 @@ async function readTerminal() {
     'var(--color-calendar-graph-day-L4-bg)'
   ]
 
-<<<<<<< HEAD
-  await page.waitForSelector('rect').then(async () => {
-    // const divsCounts = await page.$$eval('rect', e =>
-    //   {return e}
-    // );
-    //console.log('divsCounts', divsCounts[0])
+  await page.waitForSelector('.lh-condensed')
+  const divsCounts = await page.$$eval('.lh-condensed', e => e);
+  console.log('divsCounts', divsCounts)
 
-    const rect = await page.$('rect');
-    console.log('rect', rect)
-=======
->>>>>>> 831bf60bd2ca3baf0204ad66c86bdec2fe203d75
+    // const rect = await page.$('rect');
+    // console.log('rect', rect)
 
 
-  let  divsCounts = [];
-  divsCounts = await page.waitForSelector('rect').then(async () => {
-    return await page.$$eval('rect', eles => { return eles });
-  })
+  // let  divsCounts = [];
+  // divsCounts = await page.waitForSelector('rect').then(async () => {
+  //   return await page.$$eval('rect', eles => { return eles });
+  // })
 
-   console.log('divsCounts', divsCounts)
+  //  console.log('divsCounts', divsCounts)
 
-  await page.evaluate(el => {
-    console.log('el', el)
-    return el.setAttribute('fill', 'var(--color-calendar-graph-day-L2-bg)')
-  },
-    divsCounts)
+  // await page.evaluate(el => {
+  //   console.log('el', el)
+  //   return el.setAttribute('fill', 'var(--color-calendar-graph-day-L2-bg)')
+  // },
+  //   divsCounts)
 
   // 截屏
-  await page.screenshot({
-    path: `./imgs/githun_${((new Date()).getTime())}.png`,
-    fullPage:true
-  });
+  // await page.screenshot({
+  //   path: `./imgs/githun_${((new Date()).getTime())}.png`,
+  //   fullPage:true
+  // });
 
 
 
@@ -104,17 +99,10 @@ async function readTerminal() {
 
 
   // 截屏
-<<<<<<< HEAD
   await page.screenshot({
     path: `./imgs/githun.png`,
     fullPage:true
   });
-=======
-  // await page.screenshot({
-  //   path: `./imgs/githun_${((new Date()).getTime())}.png`,
-  //   fullPage:true
-  // });
->>>>>>> 831bf60bd2ca3baf0204ad66c86bdec2fe203d75
 
   await browser.close();
 
