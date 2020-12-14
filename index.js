@@ -60,10 +60,13 @@ async function readTerminal() {
   ]
 
   await page.waitForSelector('rect').then(async () => {
-    const divsCounts = await page.$$eval('rect', e =>
-      {return e}
-    );
-    console.log('divsCounts', divsCounts[0])
+    // const divsCounts = await page.$$eval('rect', e =>
+    //   {return e}
+    // );
+    //console.log('divsCounts', divsCounts[0])
+
+    const rect = await page.$('rect');
+    console.log('rect', rect)
 
   })
 
@@ -79,7 +82,7 @@ async function readTerminal() {
 
   // 截屏
   await page.screenshot({
-    path: `./imgs/githun_${((new Date()).getTime())}.png`,
+    path: `./imgs/githun.png`,
     fullPage:true
   });
 
