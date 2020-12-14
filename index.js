@@ -1,13 +1,6 @@
 const Config = require('./file.js')
 const puppeteer = require('puppeteer');
 const readline = require('readline');
-const util = require('util');
-
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout
-// });
-// const rlQuestion = util.promisify(rl.question);
 
 // 配置参数
 const login_url = 'https://github.com/login';
@@ -42,14 +35,11 @@ async function readTerminal() {
   await page.click('.session-authentication .auth-form .btn')
   // 跳转页面
   await page.waitForNavigation({
-      waitUntil: 'load'
+      waitUntil: 'networkidle2'
   })
-
-
 
   // 前往个人页面
   await page.goto(user_home);
-
 
   const colorStarArr = [
     'var(--color-calendar-graph-day-bg)',
@@ -59,6 +49,7 @@ async function readTerminal() {
     'var(--color-calendar-graph-day-L4-bg)'
   ]
 
+<<<<<<< HEAD
   await page.waitForSelector('rect').then(async () => {
     // const divsCounts = await page.$$eval('rect', e =>
     //   {return e}
@@ -67,8 +58,40 @@ async function readTerminal() {
 
     const rect = await page.$('rect');
     console.log('rect', rect)
+=======
+>>>>>>> 831bf60bd2ca3baf0204ad66c86bdec2fe203d75
 
+
+  let  divsCounts = [];
+  divsCounts = await page.waitForSelector('rect').then(async () => {
+    return await page.$$eval('rect', eles => { return eles });
   })
+
+   console.log('divsCounts', divsCounts)
+
+  await page.evaluate(el => {
+    console.log('el', el)
+    return el.setAttribute('fill', 'var(--color-calendar-graph-day-L2-bg)')
+  },
+    divsCounts)
+
+  // 截屏
+  await page.screenshot({
+    path: `./imgs/githun_${((new Date()).getTime())}.png`,
+    fullPage:true
+  });
+
+
+
+  // await page.waitForSelector('rect')
+
+  // const selectEle = await page.evaluate(async () => {
+  //   const eleArr = document.querySelectorAll('rect')
+  //   return eleArr
+  // })
+
+  // console.log('selectEle', selectEle)
+
 
 
 
@@ -81,10 +104,17 @@ async function readTerminal() {
 
 
   // 截屏
+<<<<<<< HEAD
   await page.screenshot({
     path: `./imgs/githun.png`,
     fullPage:true
   });
+=======
+  // await page.screenshot({
+  //   path: `./imgs/githun_${((new Date()).getTime())}.png`,
+  //   fullPage:true
+  // });
+>>>>>>> 831bf60bd2ca3baf0204ad66c86bdec2fe203d75
 
   await browser.close();
 
