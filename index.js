@@ -50,19 +50,25 @@ async function readTerminal() {
   ]
 
 
+  // let  divsCounts = [];
+  // divsCounts = await page.waitForSelector('rect').then(async () => {
+  //   return await page.$$eval('rect', eles => { return eles });
+  // })
 
-  let  divsCounts = [];
-  divsCounts = await page.waitForSelector('rect').then(async () => {
-    return await page.$$eval('rect', eles => { return eles });
+  //  console.log('divsCounts', divsCounts)
+
+  // await page.evaluate(el => {
+  //   console.log('el', el)
+  //   return el.setAttribute('fill', 'var(--color-calendar-graph-day-L2-bg)')
+  // },divsCounts)
+
+  const rectAll = await page.evaluate(ele => {
+
+
   })
 
-   console.log('divsCounts', divsCounts)
 
-  await page.evaluate(el => {
-    console.log('el', el)
-    return el.setAttribute('fill', 'var(--color-calendar-graph-day-L2-bg)')
-  },
-    divsCounts)
+
 
   // 截屏
   await page.screenshot({
