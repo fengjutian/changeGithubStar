@@ -65,6 +65,7 @@ async function readTerminal() {
   const rectAll = await page.evaluate(ele => {
 
 
+
   })
 
 
